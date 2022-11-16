@@ -1,18 +1,17 @@
+version: '3.9'
 
-  services:
-    my_local_anaconda:
-      image: continuumio/anaconda3:2022.05
-      container_name: my_local_anaconda
-      stdin_open: true # docker run -i
-      tty: true # docker run -t
-      volumes:
-        - $PWD/data:/opt/data
-        - $PWD/notebooks:/opt/notebooks
-      ports:
-        - 8888:8888
-      entrypoint:
-        - "/bin/sh"
-        - "-c"
-        - "conda install jupyter -y --quiet && jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
-
-
+services:
+  my_local_anaconda:
+    image: continuumio/anaconda3:latest
+    container_name: my_local_anaconda
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    volumes:
+      - $PWD/data:/opt/data
+      - $PWD/notebooks:/opt/notebooks
+    ports:
+      - 8888:8888
+    entrypoint:
+      - "/bin/sh"
+      - "-c"
+      - "conda install jupyter -y --quiet && jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
