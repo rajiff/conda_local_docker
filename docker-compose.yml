@@ -14,10 +14,19 @@ services:
     entrypoint:
       - "/bin/sh"
       - "-c"
-#      - "conda install jupyter -y --quiet && conda install openjdk -y --quiet && jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
-      -  "conda update --all -y && \
+#      - "conda install jupyter -y --quiet && conda install openjdk -y --quiet && \
+#          jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
+      - "export DOCKER_DEFAULT_PLATFORM=linux/amd64 && \
+          apt update -y && apt install -y build-essential libpq-dev && \
+          conda update --all -y && \
           conda install jupyter -y --quiet && \
           conda install openjdk -y --quiet && \
-          conda install -c conda-forge psycopg2-binary && \
+          pip install psycopg2-binary --no-binary psycopg2-binary && \
           jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
+#      -  "export DOCKER_DEFAULT_PLATFORM=linux/amd64 && \
+#          conda update --all -y && \
+#          conda install jupyter -y --quiet && \
+#          conda install openjdk -y --quiet && \
+#          pip install psycopg2-binary && \
+#          jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
 
